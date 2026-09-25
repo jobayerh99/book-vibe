@@ -61,6 +61,12 @@ const Navbar = () => {
               <Link href="/books">Books</Link>
             </li>
             <li>
+              <Link href="/listed-books">Listed Books</Link>
+            </li>
+            <li>
+              <Link href="/read-books">Read Books</Link>
+            </li>
+            <li>
               <details>
                 <summary>Parent</summary>
                 <ul className="p-2 bg-base-100 w-40 z-1">
