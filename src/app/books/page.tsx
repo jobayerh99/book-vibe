@@ -4,14 +4,18 @@ import BookCard from "@/components/shared/BookCard";
 import { IBook } from "@/types/books.type";
 
 const getBooks = async () => {
-  const res = await fetch("http://localhost:3000/booksData.json");
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/booksData.json`);
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch books");
+    if (!res.ok) {
+      throw new Error("Failed to fetch books");
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching Book Data", error)
   }
-
-  const data = await res.json();
-  return data;
 };
 
 const Books = async () => {
@@ -26,7 +30,7 @@ const Books = async () => {
         </p>
 
         <h1 className="text-4xl font-bold text-gray-900">
-          Explore All Books 
+          Explore All Books
           <span className="text-pink-600"> Favorite Book</span>
         </h1>
 
@@ -38,8 +42,8 @@ const Books = async () => {
 
       {/* Books Grid */}
       <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
-        {booksData.map((book:IBook, ind:number) => (
-          <BookCard key={ind} book = {book}/>
+        {booksData.map((book: IBook, ind: number) => (
+          <BookCard key={ind} book={book} />
         ))}
       </div>
     </section>
