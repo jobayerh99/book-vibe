@@ -7,10 +7,6 @@ const getBooks = async () => {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/booksData.json`);
 
-        if (!res.ok) {
-            throw new Error("Failed to fetch books");
-        }
-
         const data = await res.json();
         return data;
     } catch (error) {
